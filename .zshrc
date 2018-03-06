@@ -19,7 +19,8 @@ export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-alias jup="/Users/halilb/anaconda/bin/jupyter_mac.command"
+export PATH="/anaconda2/bin:$PATH"
+alias jup="/anaconda2/bin/jupyter"
 alias python='/usr/local/bin/python3'
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
