@@ -18,6 +18,10 @@ cp lambda-mod.zsh-theme ~/.oh-my-zsh/themes/
 echo "...done"
 #install fixedsys excelsior font
 cp FSEX302.ttf /Library/Fonts
+#copy iterm2 profile to dynamic profiles
+cp iterm2-profile.plist ~/Library/Application\ Support/iTerm2/DynamicProfiles/
+#show hidden files
+defaults write com.apple.finder AppleShowAllFiles YES
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
   echo "Moving any existing dotfiles from ~ to $olddir"
