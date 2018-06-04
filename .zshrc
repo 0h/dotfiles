@@ -3,25 +3,15 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/halilb/.oh-my-zsh
-export PATH=/Applications/MAMP/bin/php/php7.1.1/bin:$PATH
-alias ls='ls -GFh'
+alias ls='ls -a'
 alias gs="git status"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH="~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:${PATH}"
-export PATH="$PATH:/opt/yarn-[version]/bin"
 export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
-export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-export PATH="/anaconda2/bin:$PATH"
-alias jup="/anaconda2/bin/jupyter"
-alias python='/usr/local/bin/python3'
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
