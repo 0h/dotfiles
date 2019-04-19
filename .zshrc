@@ -1,3 +1,7 @@
+# Set CLICOLOR if you want Ansi Colors in iTerm2 
+export CLICOLOR=1
+# Set colors to match iTerm2 Terminal Colors
+export TERM=xterm-256color
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -12,6 +16,13 @@ export GOPATH=$HOME/dev/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+export PATH=/usr/local/bin/python3:$PATH
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -93,3 +104,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval $(thefuck --alias)
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi

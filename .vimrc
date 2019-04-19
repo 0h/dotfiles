@@ -20,15 +20,22 @@ Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 't9md/vim-choosewin'
 Plug 'tmux-plugins/vim-tmux', {'for': 'tmux'}
-Plug 'tomasr/molokai'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
+Plug 'flazz/vim-colorschemes'
+Plug 'wolf-dog/nighted.vim'
 
 call plug#end()
 
+" color
+syntax enable
+let t_Co=256
+set background=dark
+set termguicolors
+colorscheme gruvbox 
 "=====================================================
 "===================== SETTINGS ======================
 
@@ -51,7 +58,11 @@ set backspace=indent,eol,start  " Makes backspace key more powerful.
 set incsearch                   " Shows the match while typing
 set hlsearch                    " Highlight found searches
 set mouse=a                     "Enable mouse mode
-
+set smarttab
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 set noerrorbells             " No beeps
 set number                   " Show line numbers
 set showcmd                  " Show me what I'm typing
@@ -87,35 +98,6 @@ if has('persistent_undo')
   set undofile
   set undodir=~/.cache/vim
 endif
-
-" color
-syntax enable
-set t_Co=256
-set background=dark
-let g:molokai_original = 1
-let g:rehash256 = 1
-colorscheme molokai
-
-augroup filetypedetect
-  command! -nargs=* -complete=help Help vertical belowright help <args>
-  autocmd FileType help wincmd L
-  
-  autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-  autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-  autocmd BufNewFile,BufRead *.hcl setf conf
-  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
-  
-  autocmd BufNewFile,BufRead *.ino setlocal noet ts=4 sw=4 sts=4
-  autocmd BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
-  autocmd BufNewFile,BufRead *.md setlocal noet ts=4 sw=4
-  autocmd BufNewFile,BufRead *.html setlocal noet ts=4 sw=4
-  autocmd BufNewFile,BufRead *.vim setlocal expandtab shiftwidth=2 tabstop=2
-  autocmd BufNewFile,BufRead *.hcl setlocal expandtab shiftwidth=2 tabstop=2
-  autocmd BufNewFile,BufRead *.sh setlocal expandtab shiftwidth=2 tabstop=2
-  
-  autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2
-  autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
-augroup END
 
 "=====================================================
 "===================== STATUSLINE ====================
@@ -208,7 +190,7 @@ set statusline+=\ %*
 " This comes first, because we have mappings that depend on leader
 " With a map leader it's possible to do extra key combinations
 " i.e: <leader>w saves the current file
-let mapleader = ","
+let mapleader = "\\"
 
 " Some useful quickfix shortcuts for quickfix
 map <C-n> :cn<CR>
@@ -436,7 +418,8 @@ augroup END
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~20%' }
 
-nmap <C-p> :FzfHistory<cr>
+nmap ; :FzfBuffers<cr>
+nmap <Leader>' :FzfHistory<cr>
 imap <C-p> <esc>:<C-u>FzfHistory<cr>
 
 let g:rg_command = '
@@ -462,12 +445,42 @@ let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
 
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
-" ==================== NerdTree ====================
-" For toggling
-noremap <Leader>n :NERDTreeToggle<cr>
-noremap <Leader>f :NERDTreeFind<cr>
+" NERDTree {{{
+let g:NERDTreeMapChangeRoot =  "`"
 
-let NERDTreeShowHidden=1
+nmap <Leader>] :NERDTreeToggle<CR>
+nnoremap <Space>c :NERDTreeCWD<CR>
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=0
+let NERDTreeQuitOnOpen = 1
+let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeShowLineNumbers = 1
+let NERDTreeWinSize = 25
+
+function! NERDTreeQuit()
+  redir => buffersoutput
+  silent buffers
+  redir END
+"                     1BufNo  2Mods.     3File           4LineNo
+  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
+  let windowfound = 0
+
+  for bline in split(buffersoutput, "\n")
+    let m = matchlist(bline, pattern)
+
+    if (len(m) > 0)
+      if (m[2] =~ '..a..')
+        let windowfound = 1
+      endif
+    endif
+  endfor
+
+  if (!windowfound)
+    quitall
+  endif
+endfunction
+autocmd WinEnter * call NERDTreeQuit()
+" }}}
 
 " ==================== ag ====================
 let g:ackprg = 'ag --vimgrep --smart-case'                                                   
