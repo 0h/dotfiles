@@ -25,17 +25,23 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
-Plug 'flazz/vim-colorschemes'
 Plug 'wolf-dog/nighted.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'drewtempelmeyer/palenight.vim'
 
 call plug#end()
 
 " color
 syntax enable
 let t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark
-set termguicolors
-colorscheme gruvbox 
+colorscheme palenight
 "=====================================================
 "===================== SETTINGS ======================
 

@@ -2,6 +2,7 @@
 	name = halil bayrakci
 	email = halilb@gmail.com
 [alias]
+  p = "! git commit -a -m "commit" && git push"
 	st = status -sb
 	ci = commit
 	all = commit -am
